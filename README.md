@@ -3,9 +3,9 @@
 A cinematic, editorial, Ethiopian-inspired one-page wedding invitation.
 Built with Next.js (App Router) + Tailwind CSS.
 
-Currently included: **Hero** (countdown to Nov 21, 2026, 6:00 AM Ethiopian
-Time) and **Our Wedding Day**. More sections (Timeline, Church/Map, Gallery,
-Share Your Photos, Leave a Note, Messages, RSVP) will be added incrementally.
+All sections from the design brief are now in place:
+Hero → Our Wedding Day → Timeline → Church/Map → Gallery → Share Your Photos
+(Telegram) → Leave a Note → Messages From Guests → Final/RSVP.
 
 ## Run locally
 
@@ -41,9 +41,16 @@ tira-lydu-wedding/
 │   ├── page.js         # Assembles sections
 │   └── globals.css     # All design tokens + section styles
 ├── components/
-│   ├── Nav.js           # Minimal nav, hides on scroll down
-│   ├── Hero.js          # Names, countdown, entrance animation
-│   └── OurWeddingDay.js # Statement + scroll reveal
+│   ├── Nav.js               # Minimal nav, hides on scroll down
+│   ├── Hero.js              # Names, countdown, entrance animation
+│   ├── OurWeddingDay.js     # Statement + scroll reveal
+│   ├── Timeline.js          # Scroll-drawn line, 4 wedding-day events
+│   ├── ChurchLocation.js    # Church name, address, embedded map, directions
+│   ├── Gallery.js           # Masonry gallery + lightbox (placeholder photos)
+│   ├── SharePhotos.js       # CTA linking to the Telegram bot
+│   ├── LeaveANote.js        # Guestbook form (local state — see TODOs)
+│   ├── MessagesFromGuests.js# Approved-message wall (sample placeholder data)
+│   └── FinalRSVP.js         # Closing statement + RSVP form (local state)
 ├── tailwind.config.js
 ├── postcss.config.js
 └── next.config.js
@@ -62,13 +69,33 @@ tira-lydu-wedding/
 Fonts: **Fraunces** (serif, editorial display) + **Inter** (sans, functional
 text), loaded via `next/font/google`.
 
-## Notes for next steps
+## What still needs real data (currently placeholder)
 
-- The Hero's olive gradient is a placeholder — swap in engagement photography
-  or video once available.
+These are fully designed and functional in the browser, but not yet wired
+to a backend — that's the next milestone:
+
+- **`components/Gallery.js`** — uses `picsum.photos` placeholder images.
+  Replace the `PHOTOS` array with real engagement/wedding photography.
+- **`components/SharePhotos.js`** — `TELEGRAM_BOT_URL` is a placeholder.
+  Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
+  its actual `t.me/...` link.
+- **`components/LeaveANote.js`** — submissions currently only log to the
+  console and confirm in the UI; they are not saved anywhere or visible to
+  other guests. Needs a POST to Supabase (`status: 'pending'`).
+- **`components/MessagesFromGuests.js`** — shows hardcoded sample messages.
+  Needs a fetch from Supabase (`status = 'approved'`).
+- **`components/FinalRSVP.js`** — same as Leave a Note: submissions aren't
+  persisted yet. Needs a POST to a Supabase `rsvps` table.
+
+Planned backend: **Supabase** (Postgres) with two tables (`guestbook_messages`,
+`rsvps`) and a password-protected `/admin` route for approving/rejecting
+messages and viewing RSVPs. Guest photo submission stays on Telegram — no
+upload backend needed for that.
+
+## Other notes
+
+- The Hero's olive gradient and the Church section's background are
+  placeholders — swap in real photography/video once available.
 - Countdown target is set in `components/Hero.js` (`TARGET` constant).
-- Once Timeline/Gallery/Guestbook/RSVP are added, guest data (RSVPs, notes)
-  will need a database — Supabase (Postgres) is the planned choice, with a
-  password-protected `/admin` route for moderation.
-- Guest photo submission is handled externally via a Telegram bot link, not
-  a custom upload backend.
+- The map in `components/ChurchLocation.js` uses a keyless Google Maps embed
+  based on the address string — works out of the box, no API key needed.
