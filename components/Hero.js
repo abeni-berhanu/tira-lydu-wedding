@@ -36,50 +36,52 @@ export default function Hero() {
         <path d="M60 10 L60 110 M10 60 L110 60" />
       </svg>
 
-      <div className="hero-date">NOVEMBER 21 · 2026 &nbsp;·&nbsp; ADDIS ABABA</div>
+      <div className="hero-eyebrow">WE ARE GETTING MARRIED</div>
 
       <h1 className="hero-names">
-        <span className="word"><span>Tira</span></span>
+        <span className="word"><span>Tira</span></span>{' '}
         <span className="word"><span>&amp; Lydu</span></span>
       </h1>
 
-      <div className="hero-bottom">
-        <div className="hero-location">
-          Ethiopian Evangelical Lutheran Church<br />
-          Addis Ababa, Ethiopia
-        </div>
+      <div className="hero-rule"></div>
 
-        {mounted && remaining ? (
-          <div className="countdown">
-            <div className="unit">
-              <div className="num">{pad(remaining.days)}</div>
-              <div className="label">DAYS</div>
-            </div>
-            <div className="unit">
-              <div className="num">{pad(remaining.hours)}</div>
-              <div className="label">HRS</div>
-            </div>
-            <div className="unit">
-              <div className="num">{pad(remaining.mins)}</div>
-              <div className="label">MIN</div>
-            </div>
-            <div className="unit">
-              <div className="num">{pad(remaining.secs)}</div>
-              <div className="label">SEC</div>
-            </div>
-          </div>
-        ) : mounted && !remaining ? (
-          <div className="countdown">
-            <div className="unit">
-              <div className="num" style={{ fontSize: 'clamp(16px,2.6vw,24px)', letterSpacing: '0.04em' }}>
-                TODAY IS THE DAY.
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="countdown" aria-hidden="true" />
-        )}
+      <div className="hero-venue">
+        NOVEMBER 21, 2026<br />
+        ETHIOPIAN EVANGELICAL LUTHERAN CHURCH · ADDIS ABABA
       </div>
+
+      {mounted && remaining ? (
+        <div className="countdown">
+          <div className="unit">
+            <div className="num">{pad(remaining.days)}</div>
+            <div className="label">DAYS</div>
+          </div>
+          <div className="unit">
+            <div className="num">{pad(remaining.hours)}</div>
+            <div className="label">HRS</div>
+          </div>
+          <div className="unit">
+            <div className="num">{pad(remaining.mins)}</div>
+            <div className="label">MIN</div>
+          </div>
+          <div className="unit">
+            <div className="num">{pad(remaining.secs)}</div>
+            <div className="label">SEC</div>
+          </div>
+        </div>
+      ) : mounted && !remaining ? (
+        <div className="countdown">
+          <div className="unit">
+            <div className="num" style={{ fontSize: 'clamp(18px,2.8vw,26px)', letterSpacing: '0.04em' }}>
+              TODAY IS THE DAY.
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="countdown" aria-hidden="true" />
+      )}
+
+      <a className="hero-cta" href="#rsvp">YOU ARE INVITED</a>
     </section>
   );
 }

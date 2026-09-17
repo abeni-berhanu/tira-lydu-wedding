@@ -3,12 +3,11 @@
 import { useEffect, useRef } from 'react';
 
 export default function OurWeddingDay() {
-  const statementRef = useRef(null);
-  const subRef = useRef(null);
-  const dividerRef = useRef(null);
+  const innerRef = useRef(null);
 
   useEffect(() => {
-    const els = [statementRef.current, subRef.current, dividerRef.current].filter(Boolean);
+    const el = innerRef.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -17,23 +16,32 @@ export default function OurWeddingDay() {
       },
       { threshold: 0.3 }
     );
-    els.forEach((el) => observer.observe(el));
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="day-section" id="day">
-      <div className="day-inner">
-        <div className="day-eyebrow">OUR WEDDING DAY</div>
-        <p className="day-statement" ref={statementRef}>
-          Two people, two stories, one beginning.
+    <section className="invite-section" id="day">
+      <div className="invite-inner" ref={innerRef}>
+        <h2 className="invite-heading">Dear Family &amp; Friends</h2>
+
+        <p className="invite-quote">
+          "Two are better than one, because they have a good reward for their toil."
         </p>
-        <p className="day-sub" ref={subRef}>
-          On the 21st of November, in Addis Ababa, our families become one. What
-          began quietly between two people becomes, for one day, a celebration
-          shared by everyone we love.
+        <p className="invite-citation">Ecclesiastes 4:9</p>
+
+        <p className="invite-body">
+          Together with our families, we joyfully invite you to celebrate our
+          marriage on <strong>November 21, 2026</strong>. The ceremony will be
+          held at the <strong>Ethiopian Evangelical Lutheran Church</strong>,
+          Addis Ababa, from <strong>1:45 PM</strong>.
         </p>
-        <div className="divider-line" ref={dividerRef}></div>
+
+        <p className="invite-closing">
+          We would be honored to have you share this day with us.
+        </p>
+
+        <div className="invite-ring">💍</div>
       </div>
     </section>
   );

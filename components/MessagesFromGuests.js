@@ -15,7 +15,9 @@ export default function MessagesFromGuests() {
   return (
     <section className="messages-section">
       <div className="messages-inner">
-        <div className="messages-eyebrow">MESSAGES FROM GUESTS</div>
+        <div className="messages-eyebrow">Shared With Love</div>
+        <h2 className="messages-heading">Messages From Guests</h2>
+        <div className="messages-rule"></div>
         <div className="messages-grid">
           {MESSAGES.map((m, i) => (
             <div className="message-card" key={i}>

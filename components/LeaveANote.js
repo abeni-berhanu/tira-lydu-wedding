@@ -23,8 +23,9 @@ export default function LeaveANote() {
   return (
     <section className="note-section" id="notes">
       <div className="note-inner">
-        <div className="note-eyebrow">LEAVE A NOTE</div>
+        <div className="note-eyebrow">Leave a Note</div>
         <h2 className="note-heading">Leave a little love for Tira & Lydu.</h2>
+        <div className="note-rule"></div>
 
         {!submitted ? (
           <form className="note-form" onSubmit={handleSubmit}>

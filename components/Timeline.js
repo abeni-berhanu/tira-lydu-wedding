@@ -5,23 +5,49 @@ import { useEffect, useRef } from 'react';
 const EVENTS = [
   {
     time: '8:00 AM',
-    title: 'GROOM & BRIDE HOUSES',
+    title: 'Groom & Bride Houses',
     desc: "Morning photo sessions at both groom's and bride's houses.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 18h16M6 18V9l6-4 6 4v9" />
+        <path d="M10 18v-5h4v5" />
+      </svg>
+    ),
   },
   {
     time: '11:30 AM',
-    title: "BRIDE'S HOUSE",
+    title: "Bride's House",
     desc: "Guests gather and move to the bride's house.",
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <circle cx="8" cy="9" r="2.5" />
+        <circle cx="16" cy="9" r="2.5" />
+        <path d="M3 19c0-2.8 2.2-5 5-5s5 2.2 5 5M11 19c0-2.8 2.2-5 5-5s5 2.2 5 5" />
+      </svg>
+    ),
   },
   {
     time: '1:45 PM',
-    title: 'CHURCH CEREMONY',
+    title: 'Church Ceremony',
     desc: 'Holy matrimony ceremony at the church.',
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2v4M10 4h4" />
+        <path d="M6 21V11l6-5 6 5v10" />
+        <path d="M10 21v-6h4v6" />
+      </svg>
+    ),
   },
   {
     time: '4:00 PM',
-    title: 'DINNER & CAKE',
+    title: 'Dinner & Cake',
     desc: 'Dinner program, cake cutting and worship at Mekonenoch Hall.',
+    icon: (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 21h16v-6a3 3 0 00-3-3H7a3 3 0 00-3 3v6z" />
+        <path d="M12 8V5M12 5c-1 0-1.5-.8-1.5-1.5S11 2 12 2s1.5.8 1.5 1.5S13 5 12 5z" />
+      </svg>
+    ),
   },
 ];
 
@@ -69,25 +95,28 @@ export default function Timeline() {
 
   return (
     <section className="timeline-section" id="timeline">
-      <div className="timeline-inner">
-        <div className="timeline-eyebrow">THE DAY UNFOLDS</div>
-        <div className="timeline-track" ref={trackRef}>
-          <div className="timeline-line-bg"></div>
-          <div className="timeline-line-fill" ref={fillRef}></div>
+      <div className="section-header">
+        <div className="accent">The Day Unfolds</div>
+        <h2>Wedding Timeline</h2>
+        <div className="rule"></div>
+      </div>
 
-          {EVENTS.map((ev, i) => (
-            <div
-              className="timeline-item"
-              key={ev.time}
-              ref={(el) => (itemRefs.current[i] = el)}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-time">{ev.time}</div>
-              <div className="timeline-title">{ev.title}</div>
-              <div className="timeline-desc">{ev.desc}</div>
-            </div>
-          ))}
-        </div>
+      <div className="timeline-track" ref={trackRef}>
+        <div className="timeline-line-bg"></div>
+        <div className="timeline-line-fill" ref={fillRef}></div>
+
+        {EVENTS.map((ev, i) => (
+          <div
+            className="timeline-item"
+            key={ev.time}
+            ref={(el) => (itemRefs.current[i] = el)}
+          >
+            <div className="timeline-icon">{ev.icon}</div>
+            <div className="timeline-time">{ev.time}</div>
+            <div className="timeline-title">{ev.title}</div>
+            <div className="timeline-desc">{ev.desc}</div>
+          </div>
+        ))}
       </div>
     </section>
   );

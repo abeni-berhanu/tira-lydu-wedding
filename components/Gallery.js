@@ -26,8 +26,11 @@ export default function Gallery() {
   return (
     <section className="gallery-section" id="gallery">
       <div className="gallery-inner">
-        <div className="gallery-eyebrow">WEDDING GALLERY</div>
-        <h2 className="gallery-heading">Moments before the day.</h2>
+        <div className="section-header" style={{ maxWidth: '100%' }}>
+          <div className="gallery-eyebrow">Wedding Gallery</div>
+          <h2 className="gallery-heading">Moments before the day.</h2>
+          <div className="rule"></div>
+        </div>
 
         <div className="masonry">
           {PHOTOS.map((photo, i) => (
