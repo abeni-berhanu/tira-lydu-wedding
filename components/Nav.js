@@ -36,7 +36,7 @@ export default function Nav() {
   return (
     <>
       <nav className={`site-nav ${hidden && !menuOpen ? 'hidden' : ''}`}>
-        <span className="nav-name">Tira & Lydu</span>
+        <span className="nav-name">T &amp; L</span>
         <div className="nav-links">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href}>{l.label}</a>

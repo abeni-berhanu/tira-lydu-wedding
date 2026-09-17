@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 // TODO: replace with real approved messages fetched from Supabase
 // (status = 'approved'), ordered newest first.
 const MESSAGES = [
@@ -11,22 +13,56 @@ const MESSAGES = [
   { text: 'Congratulations to the most patient, kind couple I know.', from: 'Yonas' },
 ];
 
+function MessageCard({ text, from }) {
+  return (
+    <div className="message-card">
+      “{text}”
+      <div className="message-from">— {from}</div>
+    </div>
+  );
+}
+
 export default function MessagesFromGuests() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <section className="messages-section">
       <div className="messages-inner">
         <div className="messages-eyebrow">Shared With Love</div>
         <h2 className="messages-heading">Messages From Guests</h2>
         <div className="messages-rule"></div>
-        <div className="messages-grid">
-          {MESSAGES.map((m, i) => (
-            <div className="message-card" key={i}>
-              “{m.text}”
-              <div className="message-from">— {m.from}</div>
-            </div>
+      </div>
+
+      <div className="messages-marquee-wrap">
+        <div className="messages-marquee">
+          {/* Rendered twice back-to-back so the CSS loop (-50%) is seamless */}
+          {[...MESSAGES, ...MESSAGES].map((m, i) => (
+            <MessageCard key={i} text={m.text} from={m.from} />
           ))}
         </div>
       </div>
+
+      <div className="messages-inner">
+        <button className="messages-show-all" onClick={() => setShowAll(true)}>
+          SHOW ALL MESSAGES
+        </button>
+      </div>
+
+      {showAll && (
+        <div className="messages-modal-overlay" onClick={() => setShowAll(false)}>
+          <div className="messages-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="messages-modal-close" onClick={() => setShowAll(false)}>
+              CLOSE ✕
+            </button>
+            <h3 className="messages-modal-heading">All Messages</h3>
+            <div className="messages-modal-grid">
+              {MESSAGES.map((m, i) => (
+                <MessageCard key={i} text={m.text} from={m.from} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

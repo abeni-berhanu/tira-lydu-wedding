@@ -58,20 +58,23 @@ nav.site-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 22px clamp(20px, 5vw, 56px);
+  padding: 10px clamp(20px, 5vw, 56px);
   z-index: 100;
+  background: rgba(21, 19, 15, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(245, 241, 232, 0.08);
   transition: transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.45s ease;
-  mix-blend-mode: difference;
 }
 nav.site-nav.hidden {
   transform: translateY(-120%);
   opacity: 0;
 }
 .nav-name {
-  font-family: var(--font-fraunces), serif;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  color: var(--ivory);
+  font-family: var(--font-script), cursive;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--gold);
 }
 .nav-links {
   display: none;
@@ -455,7 +458,17 @@ nav.site-nav.hidden {
   padding: clamp(60px, 12vh, 120px) clamp(20px, 5vw, 56px) clamp(56px, 9vh, 100px);
 }
 .church-section { align-items: center; text-align: center; flex-direction: column; }
-.church-inner { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.church-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.19,1,.22,1);
+}
+.church-inner.in-view { opacity: 1; transform: translateY(0); }
 .church-eyebrow {
   font-family: var(--font-fraunces), serif;
   font-style: italic;
@@ -537,7 +550,11 @@ nav.site-nav.hidden {
   position: relative;
   cursor: zoom-in;
   background: #e8e2d3;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.19,1,.22,1);
 }
+.masonry-item.in-view { opacity: 1; transform: translateY(0); }
 .masonry-item img {
   width: 100%;
   display: block;
@@ -565,8 +582,19 @@ nav.site-nav.hidden {
   align-items: center;
   justify-content: center;
   padding: 24px;
+  animation: lightbox-fade-in 0.3s ease;
 }
-.lightbox-img { max-width: 92vw; max-height: 82vh; object-fit: contain; }
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 82vh;
+  object-fit: contain;
+  animation: lightbox-scale-in 0.35s cubic-bezier(.19,1,.22,1);
+}
+@keyframes lightbox-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lightbox-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
 .lightbox-close, .lightbox-nav {
   position: absolute;
   color: var(--ivory);
@@ -685,9 +713,9 @@ nav.site-nav.hidden {
 /* ===== MESSAGES FROM GUESTS ===== */
 .messages-section {
   background: var(--ivory);
-  padding: 0 clamp(20px, 5vw, 56px) clamp(90px, 15vh, 150px);
+  padding: 0 0 clamp(90px, 15vh, 150px);
 }
-.messages-inner { max-width: 1100px; margin: 0 auto; }
+.messages-inner { max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
 .messages-eyebrow {
   font-family: var(--font-fraunces), serif;
   font-style: italic;
@@ -709,35 +737,113 @@ nav.site-nav.hidden {
   margin: 0 auto clamp(44px, 7vh, 64px);
   opacity: 0.7;
 }
-.messages-grid {
-  columns: 1;
-  column-gap: 22px;
+
+/* Continuously scrolling marquee of notes */
+.messages-marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
-@media (min-width: 640px) { .messages-grid { columns: 2; } }
-@media (min-width: 980px) { .messages-grid { columns: 3; } }
+.messages-marquee {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: messages-scroll 42s linear infinite;
+}
+.messages-marquee-wrap:hover .messages-marquee { animation-play-state: paused; }
+
+@keyframes messages-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .message-card {
-  break-inside: avoid;
-  margin-bottom: 22px;
+  flex: 0 0 260px;
   background: #fffdf8;
   border: 1px solid rgba(21,19,15,0.08);
   box-shadow: 0 10px 30px rgba(21,19,15,0.06);
-  padding: 30px 26px;
+  padding: 26px 24px;
   font-family: var(--font-fraunces), serif;
   font-style: italic;
   font-size: 14px;
   line-height: 1.6;
   color: #2c2a25;
 }
-.message-card:nth-child(3n+1) { transform: rotate(-0.6deg); }
-.message-card:nth-child(3n+2) { transform: rotate(0.5deg); }
-.message-card:nth-child(3n) { transform: rotate(-0.3deg); }
 .message-from {
-  margin-top: 18px;
+  margin-top: 16px;
   font-family: var(--font-inter), sans-serif;
   font-style: normal;
   font-size: 11px;
   letter-spacing: 0.06em;
   color: #8a8377;
+}
+
+.messages-show-all {
+  display: block;
+  margin: clamp(36px, 5.5vh, 52px) auto 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal);
+  background: none;
+  border: 1px solid rgba(21,19,15,0.25);
+  border-radius: 999px;
+  padding: 13px 30px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.messages-show-all:hover { border-color: var(--terracotta); color: var(--terracotta); }
+
+/* All-messages modal */
+.messages-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(21,19,15,0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.messages-modal {
+  background: var(--ivory);
+  width: 100%;
+  max-width: 920px;
+  max-height: 84vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: clamp(32px, 5vw, 52px);
+  position: relative;
+}
+.messages-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #6b6459;
+  cursor: pointer;
+}
+.messages-modal-close:hover { color: var(--terracotta); }
+.messages-modal-heading {
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(20px, 3vw, 26px);
+  text-align: center;
+  margin-bottom: 28px;
+}
+.messages-modal-grid {
+  columns: 1;
+  column-gap: 20px;
+}
+@media (min-width: 640px) { .messages-modal-grid { columns: 2; } }
+@media (min-width: 900px) { .messages-modal-grid { columns: 3; } }
+.messages-modal-grid .message-card {
+  flex: none;
+  width: 100%;
+  margin-bottom: 20px;
+  break-inside: avoid;
 }
 
 /* ===== FINAL / RSVP ===== */

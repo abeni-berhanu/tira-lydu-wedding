@@ -1,13 +1,31 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 const CHURCH_ADDRESS = '2PVV+HWW, Addis Ababa, Ethiopia';
 
 export default function ChurchLocation() {
+  const innerRef = useRef(null);
   const mapQuery = encodeURIComponent(CHURCH_ADDRESS);
+
+  useEffect(() => {
+    const el = innerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('in-view');
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="church-section" id="place">
-      <div className="church-inner">
+      <div className="church-inner" ref={innerRef}>
         <div className="church-eyebrow">The Ceremony</div>
         <h2 className="church-name">Ethiopian Evangelical Lutheran Church</h2>
         <div className="church-time">1:45 PM</div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Placeholder images — replace src with real engagement/wedding photography.
 // Varied heights via picsum's fixed seeds create the masonry effect.
@@ -18,6 +18,20 @@ const PHOTOS = [
 
 export default function Gallery() {
   const [openIndex, setOpenIndex] = useState(null);
+  const itemRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('in-view');
+        });
+      },
+      { threshold: 0.15 }
+    );
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   function close() { setOpenIndex(null); }
   function prev(e) { e.stopPropagation(); setOpenIndex((i) => (i - 1 + PHOTOS.length) % PHOTOS.length); }
@@ -34,7 +48,13 @@ export default function Gallery() {
 
         <div className="masonry">
           {PHOTOS.map((photo, i) => (
-            <div className="masonry-item" key={photo.src} onClick={() => setOpenIndex(i)}>
+            <div
+              className="masonry-item"
+              key={photo.src}
+              ref={(el) => (itemRefs.current[i] = el)}
+              style={{ transitionDelay: `${(i % 3) * 90}ms` }}
+              onClick={() => setOpenIndex(i)}
+            >
               <img src={photo.src} alt={photo.caption || 'Wedding gallery photo'} loading="lazy" />
               {photo.caption && <div className="masonry-caption">{photo.caption}</div>}
             </div>
