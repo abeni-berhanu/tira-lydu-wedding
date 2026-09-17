@@ -28,47 +28,51 @@ export default function FinalRSVP() {
       </p>
 
       {!submitted ? (
-        <form className="rsvp-form" onSubmit={handleSubmit}>
-          <div className="rsvp-field">
-            <label htmlFor="rsvp-name">Your name</label>
-            <input
-              id="rsvp-name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="rsvp-field">
-            <label htmlFor="rsvp-attending">Will you be attending?</label>
-            <select
-              id="rsvp-attending"
-              value={attending}
-              onChange={(e) => setAttending(e.target.value)}
-            >
-              <option value="yes">Joyfully attending</option>
-              <option value="no">Regretfully declining</option>
-            </select>
-          </div>
-          {attending === 'yes' && (
+        <div className="rsvp-box">
+          <form className="rsvp-form" onSubmit={handleSubmit}>
             <div className="rsvp-field">
-              <label htmlFor="rsvp-guests">Number of guests</label>
+              <label htmlFor="rsvp-name">Your name</label>
               <input
-                id="rsvp-guests"
-                type="number"
-                min="1"
-                max="10"
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
+                id="rsvp-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
-          )}
-          <button type="submit" className="rsvp-submit">CONFIRM RSVP</button>
-        </form>
+            <div className="rsvp-field">
+              <label htmlFor="rsvp-attending">Will you be attending?</label>
+              <select
+                id="rsvp-attending"
+                value={attending}
+                onChange={(e) => setAttending(e.target.value)}
+              >
+                <option value="yes">Joyfully attending</option>
+                <option value="no">Regretfully declining</option>
+              </select>
+            </div>
+            {attending === 'yes' && (
+              <div className="rsvp-field">
+                <label htmlFor="rsvp-guests">Number of guests</label>
+                <input
+                  id="rsvp-guests"
+                  type="number"
+                  min="1"
+                  max="10"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                />
+              </div>
+            )}
+            <button type="submit" className="rsvp-submit">CONFIRM RSVP</button>
+          </form>
+        </div>
       ) : (
-        <p className="rsvp-confirm">
-          Thank you, {name} — your RSVP has been received.
-        </p>
+        <div className="rsvp-box">
+          <p className="rsvp-confirm">
+            Thank you, {name} — your RSVP has been received.
+          </p>
+        </div>
       )}
     </section>
   );

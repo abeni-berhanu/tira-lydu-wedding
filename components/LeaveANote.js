@@ -28,34 +28,38 @@ export default function LeaveANote() {
         <div className="note-rule"></div>
 
         {!submitted ? (
-          <form className="note-form" onSubmit={handleSubmit}>
-            <div className="note-field">
-              <label htmlFor="note-name">Your name</label>
-              <input
-                id="note-name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="note-field">
-              <label htmlFor="note-message">Your message</label>
-              <textarea
-                id="note-message"
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit" className="note-submit">SEND LOVE ♡</button>
-          </form>
+          <div className="note-box">
+            <form className="note-form" onSubmit={handleSubmit}>
+              <div className="note-field">
+                <label htmlFor="note-name">Your name</label>
+                <input
+                  id="note-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="note-field">
+                <label htmlFor="note-message">Your message</label>
+                <textarea
+                  id="note-message"
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="note-submit">SEND LOVE ♡</button>
+            </form>
+          </div>
         ) : (
-          <p className="note-confirm">
-            Thank you — your note has been sent and will appear below once
-            Tira &amp; Lydu have had a chance to read it.
-          </p>
+          <div className="note-box">
+            <p className="note-confirm">
+              Thank you — your note has been sent and will appear below once
+              Tira &amp; Lydu have had a chance to read it.
+            </p>
+          </div>
         )}
       </div>
     </section>
