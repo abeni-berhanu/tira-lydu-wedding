@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 const CHURCH_ADDRESS = '2PVV+HWW, Addis Ababa, Ethiopia';
 
@@ -25,6 +26,17 @@ export default function ChurchLocation() {
 
   return (
     <section className="church-section" id="place">
+      <div className="church-bg">
+        <Image
+          src="/images/church-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          style={{ objectFit: 'cover', objectPosition: '65% 50%' }}
+        />
+      </div>
+      <div className="church-scrim"></div>
+
       <div className="church-inner" ref={innerRef}>
         <div className="church-eyebrow">The Ceremony</div>
         <h2 className="church-name">Ethiopian Evangelical Lutheran Church</h2>
