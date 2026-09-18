@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+// id: null means "scroll to top" (Home); others match section ids in the page.
 const LINKS = [
-  { href: '#timeline', label: 'Day' },
-  { href: '#place', label: 'Place' },
-  { href: '#gallery', label: 'Gallery' },
-  { href: '#notes', label: 'Notes' },
-  { href: '#rsvp', label: 'RSVP' },
+  { id: null, label: 'Home' },
+  { id: 'timeline', label: 'Timeline' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'notes', label: 'Notes' },
+  { id: 'rsvp', label: 'RSVP' },
 ];
 
 export default function Nav() {
@@ -33,13 +34,29 @@ export default function Nav() {
     setMenuOpen(false);
   }
 
+  // Scrolls to a section without touching the URL hash, so a page refresh
+  // always lands back at the top instead of jumping to the last section.
+  function goTo(id) {
+    if (id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
   return (
     <>
       <nav className={`site-nav ${hidden && !menuOpen ? 'hidden' : ''}`}>
         <span className="nav-name">T &amp; L</span>
         <div className="nav-links">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href}>{l.label}</a>
+            <a
+              key={l.label}
+              href="#"
+              onClick={(e) => { e.preventDefault(); goTo(l.id); }}
+            >
+              {l.label}
+            </a>
           ))}
         </div>
         <button
@@ -58,7 +75,13 @@ export default function Nav() {
           CLOSE ✕
         </button>
         {LINKS.map((l) => (
-          <a key={l.href} href={l.href} onClick={closeMenu}>{l.label}</a>
+          <a
+            key={l.label}
+            href="#"
+            onClick={(e) => { e.preventDefault(); closeMenu(); goTo(l.id); }}
+          >
+            {l.label}
+          </a>
         ))}
       </div>
     </>

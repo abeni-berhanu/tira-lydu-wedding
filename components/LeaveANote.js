@@ -24,7 +24,7 @@ export default function LeaveANote() {
     <section className="note-section" id="notes">
       <div className="note-inner">
         <div className="note-eyebrow">Leave a Note</div>
-        <h2 className="note-heading">Leave a little love for Tira & Lydu.</h2>
+        <h2 className="note-heading">Leave a wish for the couple.</h2>
         <div className="note-rule"></div>
 
         {!submitted ? (
