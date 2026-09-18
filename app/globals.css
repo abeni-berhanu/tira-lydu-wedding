@@ -120,7 +120,9 @@ nav.site-nav.hidden {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  background: var(--charcoal);
+  background: rgba(21, 19, 15, 0.55);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -548,12 +550,25 @@ nav.site-nav.hidden {
   width: 100%;
   max-width: 560px;
   aspect-ratio: 16 / 10;
-  border: 1px solid rgba(245,241,232,0.18);
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(245, 241, 232, 0.08);
+  border: 1px solid rgba(245, 241, 232, 0.24);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 34px rgba(0, 0, 0, 0.28);
   overflow: hidden;
   margin-bottom: 30px;
+}
+.church-map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  border-radius: 10px;
   filter: grayscale(0.3) contrast(1.05);
 }
-.church-map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
 .church-cta {
   display: inline-flex;
   align-items: center;
@@ -562,11 +577,15 @@ nav.site-nav.hidden {
   letter-spacing: 0.08em;
   color: var(--ivory);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 4px;
-  transition: opacity 0.3s ease;
+  background: rgba(245, 241, 232, 0.1);
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border-radius: 999px;
+  padding: 13px 30px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
-.church-cta:hover { opacity: 0.7; }
+.church-cta:hover { background: rgba(245, 241, 232, 0.2); border-color: var(--gold); }
 
 /* ===== GALLERY ===== */
 .gallery-section {
