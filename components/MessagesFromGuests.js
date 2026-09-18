@@ -26,7 +26,7 @@ export default function MessagesFromGuests() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section className="messages-section">
+    <section className="messages-section" id="notes">
       <div className="messages-inner">
         <div className="messages-eyebrow">Shared With Love</div>
         <h2 className="messages-heading">Messages From Guests</h2>
