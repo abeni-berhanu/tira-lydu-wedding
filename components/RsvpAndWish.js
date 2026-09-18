@@ -5,7 +5,6 @@ import { useState } from 'react';
 export default function RsvpAndWish() {
   const [name, setName] = useState('');
   const [attending, setAttending] = useState('yes');
-  const [guests, setGuests] = useState('1');
   const [wish, setWish] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -14,9 +13,9 @@ export default function RsvpAndWish() {
     if (!name.trim()) return;
 
     // TODO: replace with a real POST to Supabase once the backend is wired
-    // up — one row in `rsvps` (name, attending, guests) and, if a wish was
+    // up — one row in `rsvps` (name, attending) and, if a wish was
     // written, one row in `guestbook_messages` (status: 'pending').
-    console.log('RSVP + wish submitted:', { name, attending, guests, wish });
+    console.log('RSVP + wish submitted:', { name, attending, wish });
 
     setSubmitted(true);
   }
@@ -53,20 +52,6 @@ export default function RsvpAndWish() {
                   <option value="no">Regretfully declining</option>
                 </select>
               </div>
-
-              {attending === 'yes' && (
-                <div className="note-field">
-                  <label htmlFor="rsvp-guests">Number of guests</label>
-                  <input
-                    id="rsvp-guests"
-                    type="number"
-                    min="1"
-                    max="10"
-                    value={guests}
-                    onChange={(e) => setGuests(e.target.value)}
-                  />
-                </div>
-              )}
 
               <div className="note-field">
                 <label htmlFor="rsvp-wish">Leave a wish for the couple (optional)</label>

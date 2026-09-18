@@ -19,6 +19,9 @@ body {
   color: var(--charcoal);
   overflow-x: hidden;
   margin: 0;
+  /* Forces native controls (like the RSVP dropdown) to render light-themed
+     regardless of the visitor's OS dark mode, so it always matches the site. */
+  color-scheme: light;
 }
 .font-serif-display { font-family: var(--font-fraunces), Georgia, serif; }
 
@@ -764,8 +767,25 @@ nav.site-nav.hidden {
   outline: none;
   transition: border-color 0.3s ease;
 }
-.note-field select option { color: var(--charcoal); }
-.note-field input:focus, .note-field textarea:focus { border-color: var(--terracotta); }
+.note-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0;
+  background-color: transparent;
+  color-scheme: light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23A65F48' stroke-width='1.3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 10px 6px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+.note-field select option {
+  background-color: var(--ivory);
+  color: var(--charcoal);
+}
+.note-field input:focus, .note-field textarea:focus, .note-field select:focus { border-color: var(--terracotta); }
 .note-submit {
   margin-top: 4px;
   font-size: 11px;

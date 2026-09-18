@@ -7,8 +7,8 @@ const LINKS = [
   { id: null, label: 'Home' },
   { id: 'timeline', label: 'Timeline' },
   { id: 'gallery', label: 'Gallery' },
-  { id: 'notes', label: 'Notes' },
   { id: 'rsvp', label: 'RSVP' },
+  { id: 'notes', label: 'Notes' },
 ];
 
 export default function Nav() {
