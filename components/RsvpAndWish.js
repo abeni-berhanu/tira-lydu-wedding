@@ -7,17 +7,34 @@ export default function RsvpAndWish() {
   const [attending, setAttending] = useState('yes');
   const [wish, setWish] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim()) return;
+    if (!name.trim() || submitting) return;
 
-    // TODO: replace with a real POST to Supabase once the backend is wired
-    // up — one row in `rsvps` (name, attending) and, if a wish was
-    // written, one row in `guestbook_messages` (status: 'pending').
-    console.log('RSVP + wish submitted:', { name, attending, wish });
+    setSubmitting(true);
+    setError('');
 
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), attending, wish }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -63,7 +80,13 @@ export default function RsvpAndWish() {
                 />
               </div>
 
-              <button type="submit" className="note-submit">CONFIRM RSVP</button>
+              <button type="submit" className="note-submit" disabled={submitting}>
+                {submitting ? 'SENDING…' : 'CONFIRM RSVP'}
+              </button>
+
+              {error && (
+                <p style={{ fontSize: 12, color: '#A65F48', marginTop: -6 }}>{error}</p>
+              )}
             </form>
           </div>
         ) : (

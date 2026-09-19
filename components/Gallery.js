@@ -39,6 +39,7 @@ export default function Gallery() {
 
   return (
     <section className="gallery-section" id="gallery">
+      <div className="gallery-watermark" aria-hidden="true">Gallery</div>
       <div className="gallery-inner">
         <div className="section-header" style={{ maxWidth: '100%' }}>
           <div className="gallery-eyebrow">Wedding Gallery</div>

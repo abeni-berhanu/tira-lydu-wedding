@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 // id: null means "scroll to top" (Home); others match section ids in the page.
 const LINKS = [
   { id: null, label: 'Home' },
-  { id: 'timeline', label: 'Timeline' },
   { id: 'gallery', label: 'Gallery' },
+  { id: 'timeline', label: 'Timeline' },
   { id: 'rsvp', label: 'RSVP' },
   { id: 'notes', label: 'Notes' },
 ];

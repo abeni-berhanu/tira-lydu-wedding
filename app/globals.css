@@ -597,10 +597,28 @@ nav.site-nav.hidden {
 
 /* ===== GALLERY ===== */
 .gallery-section {
+  position: relative;
+  overflow: hidden;
   padding: clamp(80px, 14vh, 140px) clamp(20px, 5vw, 56px);
-  background: var(--ivory);
+  background: linear-gradient(180deg, #efe9da 0%, var(--ivory) 100%);
 }
-.gallery-inner { max-width: 1200px; margin: 0 auto; }
+.gallery-watermark {
+  position: absolute;
+  top: clamp(-10px, -2vw, 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-fraunces), serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(120px, 22vw, 280px);
+  line-height: 1;
+  color: rgba(21, 19, 15, 0.035);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+.gallery-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
 .gallery-eyebrow {
   font-family: var(--font-fraunces), serif;
   font-style: italic;
@@ -608,9 +626,12 @@ nav.site-nav.hidden {
   color: var(--terracotta);
   margin-bottom: 10px;
 }
-.gallery-heading {
+.gallery-section .gallery-heading {
   font-family: var(--font-fraunces), serif;
-  font-size: clamp(24px, 3.74vw, 37px);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(30px, 5.2vw, 50px);
+  letter-spacing: 0.01em;
   margin-bottom: 20px;
 }
 .masonry {
