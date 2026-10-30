@@ -95,7 +95,16 @@ export default function Hero() {
           <div className="countdown" aria-hidden="true" />
         )}
 
-        <a className="hero-cta" href="#rsvp">YOU ARE INVITED</a>
+        <a
+          className="hero-cta"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          YOU ARE INVITED
+        </a>
       </div>
     </section>
   );
