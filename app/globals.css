@@ -326,7 +326,7 @@ nav.site-nav.hidden {
 
 /* ===== OUR WEDDING DAY (invitation-style, centered) ===== */
 .invite-section {
-  padding: clamp(110px, 17vh, 170px) clamp(20px, 5vw, 56px);
+  padding: clamp(64px, 10vh, 100px) clamp(20px, 5vw, 56px);
   background: var(--ivory);
 }
 .invite-inner {
@@ -343,7 +343,7 @@ nav.site-nav.hidden {
   font-family: var(--font-fraunces), serif;
   font-weight: 400;
   font-size: clamp(26px, 4.25vw, 39px);
-  margin-bottom: 46px;
+  margin-bottom: 28px;
 }
 .invite-quote {
   font-family: var(--font-fraunces), serif;
@@ -351,7 +351,7 @@ nav.site-nav.hidden {
   font-size: clamp(16px, 2.2vw, 19px);
   color: #5c574c;
   line-height: 1.8;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 .invite-citation {
   font-family: var(--font-fraunces), serif;
@@ -359,34 +359,34 @@ nav.site-nav.hidden {
   font-size: 14px;
   letter-spacing: 0.02em;
   color: var(--charcoal);
-  margin-bottom: 26px;
+  margin-bottom: 16px;
 }
 .invite-quote-am {
   font-family: var(--font-ethiopic), var(--font-fraunces), serif;
   font-size: clamp(17px, 2.3vw, 20px);
   color: #5c574c;
   line-height: 1.8;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .invite-citation-am {
   font-family: var(--font-ethiopic), var(--font-fraunces), serif;
   font-weight: 600;
   font-size: 14px;
   color: var(--charcoal);
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .invite-body {
   font-size: 15px;
-  line-height: 2.1;
+  line-height: 1.9;
   color: #4a4640;
   max-width: 52ch;
-  margin: 0 auto 38px;
+  margin: 0 auto 22px;
 }
 .invite-body strong { color: var(--charcoal); font-weight: 600; }
 .invite-closing {
   font-size: 15px;
   color: #4a4640;
-  margin-bottom: 46px;
+  margin-bottom: 24px;
 }
 .invite-ring { font-size: 22px; }
 

@@ -25,9 +25,9 @@ export default function OurWeddingDay() {
       <div className="invite-inner" ref={innerRef}>
         <h2 className="invite-heading">Dear Family &amp; Friends</h2>
 
-        <p className="invite-quote">“Thus far the Lord has helped us.”</p>
+        <p className="invite-quote">.…“Thus far the Lord has helped us.”….</p>
         <p className="invite-citation">1 Samuel 7:12</p>
-        <p className="invite-quote-am">“እስከ አሁን ድረስ እግዚአብሔር ረድቶናል”</p>
+        <p className="invite-quote-am">…እስከ አሁን ድረስ እግዚአብሔር ረድቶናል…</p>
         <p className="invite-citation-am">1 ሳሙኤል 7:12</p>
 
         <p className="invite-body">
