@@ -1,4 +1,4 @@
-import { Fraunces, Inter, Pinyon_Script } from 'next/font/google';
+import { Fraunces, Inter, Pinyon_Script, Noto_Serif_Ethiopic } from 'next/font/google';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -23,6 +23,13 @@ const pinyon = Pinyon_Script({
   display: 'swap',
 });
 
+const ethiopic = Noto_Serif_Ethiopic({
+  subsets: ['ethiopic'],
+  weight: ['400', '600'],
+  variable: '--font-ethiopic',
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'Tira & Lydu',
   description: 'November 21, 2026 — Addis Ababa, Ethiopia',
@@ -30,7 +37,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${pinyon.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${pinyon.variable} ${ethiopic.variable}`}>
       <body>{children}</body>
     </html>
   );

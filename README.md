@@ -3,7 +3,7 @@
 A cinematic, editorial, Ethiopian-inspired one-page wedding invitation.
 Built with Next.js (App Router) + Tailwind CSS + Supabase.
 
-Flow: Hero → Our Wedding Day → Timeline → Church/Map → Gallery →
+Flow: Hero → Our Wedding Day → Gallery → Church/Map →
 Share Your Photos (Telegram) → RSVP + Wish (combined form) →
 Messages From Guests → Footer.
 
@@ -96,7 +96,6 @@ tira-lydu-wedding/
 │   ├── ScrollToTop.js       # Forces the page to open at the Hero on refresh
 │   ├── Hero.js              # Names, countdown, background photo
 │   ├── OurWeddingDay.js     # "Dear Family & Friends" invitation text
-│   ├── Timeline.js          # Scroll-drawn line, 4 wedding-day events
 │   ├── ChurchLocation.js    # Church name, background photo, map, directions
 │   ├── Gallery.js           # Masonry gallery + lightbox (placeholder photos)
 │   ├── SharePhotos.js       # Compact CTA linking to the Telegram bot
