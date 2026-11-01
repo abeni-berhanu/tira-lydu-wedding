@@ -15,7 +15,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: var(--font-inter), -apple-system, sans-serif;
+  font-family: var(--font-body), -apple-system, sans-serif;
   background: var(--ivory);
   color: var(--charcoal);
   overflow-x: hidden;
@@ -309,8 +309,9 @@ nav.site-nav.hidden {
   color: #fff;
   text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  background: transparent;
-  border: 0.5px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, #B08F55 0%, #735826 100%);
+  border: 0.5px solid transparent;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
   border-radius: 999px;
   padding: 16px 40px;
   opacity: 0;
@@ -318,10 +319,9 @@ nav.site-nav.hidden {
   transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
 }
 .hero-cta:hover {
-  background: linear-gradient(135deg, #B08F55 0%, #735826 100%);
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+  background: linear-gradient(135deg, #9E7F47 0%, #5E4720 100%);
+  box-shadow: 0 6px 18px rgba(185, 154, 99, 0.28);
+  transform: translateY(-1px);
 }
 
 @keyframes fadeUp {
@@ -355,27 +355,31 @@ nav.site-nav.hidden {
   font-style: italic;
   font-size: clamp(16px, 2.2vw, 19px);
   color: #5c574c;
-  line-height: 1.8;
-  margin-bottom: 14px;
+  line-height: 1.25;
+  margin-bottom: 0;
 }
 .invite-citation {
   font-family: var(--font-fraunces), serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.02em;
+  line-height: 1.2;
+  margin-top: -2px;
   color: var(--charcoal);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 .invite-quote-am {
   font-family: var(--font-ethiopic), var(--font-fraunces), serif;
   font-size: clamp(17px, 2.3vw, 20px);
   color: #5c574c;
-  line-height: 1.8;
-  margin-bottom: 6px;
+  line-height: 1.35;
+  margin-bottom: 0;
 }
 .invite-citation-am {
   font-family: var(--font-ethiopic), var(--font-fraunces), serif;
   font-weight: 600;
+  line-height: 1.3;
+  margin-top: -2px;
   font-size: 14px;
   color: var(--charcoal);
   margin-bottom: 30px;
@@ -417,12 +421,14 @@ nav.site-nav.hidden {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    to top,
-    rgba(21, 19, 15, 0.92) 10%,
-    rgba(21, 19, 15, 0.6) 55%,
-    rgba(21, 19, 15, 0.8) 100%
-  );
+  background:
+    linear-gradient(rgba(40, 46, 28, 0.14), rgba(40, 46, 28, 0.14)),
+    linear-gradient(
+      to top,
+      rgba(12, 13, 9, 0.94) 10%,
+      rgba(15, 17, 11, 0.76) 55%,
+      rgba(12, 13, 9, 0.88) 100%
+    );
 }
 .church-inner {
   position: relative;
@@ -553,21 +559,36 @@ nav.site-nav.hidden {
   column-count: 2;
   column-gap: 14px;
 }
-@media (min-width: 720px) { .masonry { column-count: 3; column-gap: 18px; } }
+@media (min-width: 720px) { .masonry { column-count: 3; column-gap: 22px; } }
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 14px;
   overflow: hidden;
   position: relative;
   cursor: zoom-in;
+  border-radius: 14px;
   background: #e8e2d3;
+  aspect-ratio: 2 / 3;
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.19,1,.22,1);
 }
+@media (min-width: 720px) { .masonry-item { margin-bottom: 22px; } }
 .masonry-item.in-view { opacity: 1; transform: translateY(0); }
+/* Varied tile shapes (all portrait-friendly, crops stay mild) so the
+   gallery has a natural, uneven rhythm instead of a uniform grid. */
+.masonry-item:nth-child(7n+1) { aspect-ratio: 2 / 3; }
+.masonry-item:nth-child(7n+2) { aspect-ratio: 4 / 5; }
+.masonry-item:nth-child(7n+3) { aspect-ratio: 1 / 1; }
+.masonry-item:nth-child(7n+4) { aspect-ratio: 3 / 4; }
+.masonry-item:nth-child(7n+5) { aspect-ratio: 5 / 8; }
+.masonry-item:nth-child(7n+6) { aspect-ratio: 5 / 6; }
+.masonry-item:nth-child(7n+7) { aspect-ratio: 3 / 5; }
 .masonry-item img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
   display: block;
   transition: transform 0.7s cubic-bezier(.19,1,.22,1);
 }
@@ -694,7 +715,7 @@ nav.site-nav.hidden {
   color: #6b6459;
 }
 .note-field input, .note-field textarea, .note-field select {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 15px;
   background: transparent;
   border: none;
@@ -806,7 +827,7 @@ nav.site-nav.hidden {
 }
 .message-from {
   margin-top: 16px;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-style: normal;
   font-size: 13px;
   letter-spacing: 0.06em;

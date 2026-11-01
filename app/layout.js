@@ -1,4 +1,4 @@
-import { Fraunces, Inter, Pinyon_Script, Noto_Serif_Ethiopic } from 'next/font/google';
+import { Fraunces, Nunito, Pinyon_Script, Noto_Serif_Ethiopic } from 'next/font/google';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -9,10 +9,10 @@ const fraunces = Fraunces({
   display: 'swap',
 });
 
-const inter = Inter({
+const body = Nunito({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
-  variable: '--font-inter',
+  variable: '--font-body',
   display: 'swap',
 });
 
@@ -37,7 +37,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${pinyon.variable} ${ethiopic.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${body.variable} ${pinyon.variable} ${ethiopic.variable}`}>
       <body>{children}</body>
     </html>
   );

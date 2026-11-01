@@ -40,7 +40,7 @@ export default function ChurchLocation() {
       <div className="church-inner" ref={innerRef}>
         <div className="church-eyebrow">The Ceremony</div>
         <h2 className="church-name">Ethiopian Evangelical Lutheran Church</h2>
-        <div className="church-time">1:45 PM</div>
+        <div className="church-time">1:30 PM</div>
 
         <div className="church-map-wrap">
           <iframe

@@ -27,14 +27,14 @@ export default function OurWeddingDay() {
 
         <p className="invite-quote">.…“Thus far the Lord has helped us.”….</p>
         <p className="invite-citation">1 Samuel 7:12</p>
-        <p className="invite-quote-am">…እስከ አሁን ድረስ እግዚአብሔር ረድቶናል…</p>
+        <p className="invite-quote-am">…“እስከ አሁን ድረስ እግዚአብሔር ረድቶናል”…</p>
         <p className="invite-citation-am">1 ሳሙኤል 7:12</p>
 
         <p className="invite-body">
           Together with our families, we joyfully invite you to celebrate our
           marriage on <strong>November 21, 2026</strong>. The ceremony will be
           held at the <strong>Ethiopian Evangelical Lutheran Church</strong>,
-          Addis Ababa, from <strong>1:45 PM</strong>.
+          Addis Ababa, from <strong>1:30 PM</strong>.
         </p>
 
         <p className="invite-closing">

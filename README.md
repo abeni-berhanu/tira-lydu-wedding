@@ -97,7 +97,8 @@ tira-lydu-wedding/
 │   ├── Hero.js              # Names, countdown, background photo
 │   ├── OurWeddingDay.js     # "Dear Family & Friends" invitation text
 │   ├── ChurchLocation.js    # Church name, background photo, map, directions
-│   ├── Gallery.js           # Masonry gallery + lightbox (placeholder photos)
+│   ├── Gallery.js           # Reads photos from public/gallery (server)
+│   ├── GalleryClient.js     # Masonry gallery + lightbox
 │   ├── SharePhotos.js       # Compact CTA linking to the Telegram bot
 │   ├── RsvpAndWish.js       # Combined RSVP + optional wish, posts to /api/rsvp
 │   ├── MessagesFromGuests.js# Marquee + "Show All" modal, reads from Supabase
@@ -131,7 +132,7 @@ via `next/font/google`.
 
 ## What's still placeholder
 
-- **`components/Gallery.js`** — uses `picsum.photos` placeholder images.
+- **`public/gallery/`** — drop your photos here (01.jpg, 02.jpg, …); they appear in the gallery automatically. Placeholders show while the folder is empty.
   Replace the `PHOTOS` array with real engagement/wedding photography.
 - **`components/SharePhotos.js`** — `TELEGRAM_BOT_URL` is a placeholder.
   Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
