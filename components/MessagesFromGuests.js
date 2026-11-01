@@ -7,7 +7,7 @@ function MessageCard({ text, from }) {
   return (
     <div className="message-card">
       “{text}”
-      <div className="message-from">— {from}</div>
+      <div className="message-from">{from}</div>
     </div>
   );
 }
@@ -54,7 +54,7 @@ export default function MessagesFromGuests() {
       {loading ? null : messages.length === 0 ? (
         <div className="messages-inner">
           <p style={{ textAlign: 'center', fontSize: 13, color: '#8a8377' }}>
-            No messages yet — be the first to leave a wish above.
+            No messages yet. Be the first to leave a wish above.
           </p>
         </div>
       ) : (

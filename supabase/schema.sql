@@ -19,13 +19,13 @@ alter table rsvps enable row level security;
 alter table guestbook_messages enable row level security;
 
 -- Anyone can submit an RSVP. There is no public SELECT policy, so guests
--- cannot read each other's RSVPs — only insert their own.
+-- cannot read each other's RSVPs, only insert their own.
 create policy "Public can insert RSVPs"
   on rsvps for insert
   to anon
   with check (true);
 
--- Anyone can submit a guestbook message — it always goes in as 'pending'.
+-- Anyone can submit a guestbook message, it always goes in as 'pending'.
 create policy "Public can insert messages"
   on guestbook_messages for insert
   to anon

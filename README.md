@@ -1,4 +1,4 @@
-# Tira & Lydu — Wedding Website
+# Tira & Lydu Wedding Website
 
 A cinematic, editorial, Ethiopian-inspired one-page wedding invitation.
 Built with Next.js (App Router) + Tailwind CSS + Supabase.
@@ -16,7 +16,7 @@ npm run dev
 
 Then open http://localhost:3000
 
-The site runs and looks correct even without Supabase configured — the
+The site runs and looks correct even without Supabase configured, the
 RSVP form will show an error on submit, and the Messages wall will show
 "No messages yet" until you set up the backend below.
 
@@ -31,13 +31,13 @@ This powers the RSVP form, the guestbook wishes, and the admin dashboard.
 3. Go to **Settings → API** and copy three values:
    - **Project URL**
    - **anon public** key
-   - **service_role** key (click "Reveal" — keep this one secret)
+   - **service_role** key (click "Reveal", keep this one secret)
 4. Copy `.env.local.example` to `.env.local` and fill in those three values,
    plus choose a password for `ADMIN_PASSWORD`.
 5. Restart `npm run dev` if it was already running.
 
 Test it: submit the RSVP form on the site, then check **Table Editor** in
-Supabase — you should see a new row in `rsvps` (and in `guestbook_messages`
+Supabase, you should see a new row in `rsvps` (and in `guestbook_messages`
 if you left a wish).
 
 ## The admin dashboard
@@ -49,7 +49,7 @@ Visit `/admin` (e.g. `http://localhost:3000/admin`, or your live URL +
   "Messages From Guests" wall
 - See the full RSVP list (who's coming, who declined)
 
-This page isn't linked from the public site — it's only reachable if you
+This page isn't linked from the public site, it's only reachable if you
 know the URL, protected behind the password.
 
 ## Deploy to Vercel
@@ -67,7 +67,7 @@ know the URL, protected behind the password.
 2. Go to https://vercel.com/new, import the `tira-lydu-wedding` repo.
 3. Before deploying, add the same four environment variables from your
    `.env.local` in Vercel's **Environment Variables** section (Project
-   Settings → Environment Variables) — `.env.local` itself is never pushed
+   Settings → Environment Variables), `.env.local` itself is never pushed
    to GitHub, so this step is required for the live site to work.
 4. Click **Deploy**. Every future push to `main` redeploys automatically.
 
@@ -86,11 +86,11 @@ tira-lydu-wedding/
 │   ├── admin/
 │   │   └── page.js        # Password-protected dashboard
 │   └── api/
-│       ├── rsvp/route.js              # POST — public, submits RSVP + wish
+│       ├── rsvp/route.js              # POST, public, submits RSVP + wish
 │       └── admin/
-│           ├── login/route.js         # POST — checks password, sets cookie
-│           ├── messages/route.js      # GET/PATCH/DELETE — admin only
-│           └── rsvps/route.js         # GET — admin only
+│           ├── login/route.js         # POST, checks password, sets cookie
+│           ├── messages/route.js      # GET/PATCH/DELETE, admin only
+│           └── rsvps/route.js         # GET, admin only
 ├── components/
 │   ├── Nav.js               # Hides on scroll down, hamburger on mobile
 │   ├── ScrollToTop.js       # Forces the page to open at the Hero on refresh
@@ -127,19 +127,19 @@ tira-lydu-wedding/
 | Olive       | `#3F4436` | Hero/Timeline dark background wash    |
 
 Fonts: **Fraunces** (serif, editorial display), **Inter** (sans, functional
-text), **Pinyon Script** (the "T & L" logo and Footer names) — all loaded
+text), **Pinyon Script** (the "T & L" logo and Footer names), all loaded
 via `next/font/google`.
 
 ## What's still placeholder
 
-- **`public/gallery/`** — drop your photos here (01.jpg, 02.jpg, …); they appear in the gallery automatically. Placeholders show while the folder is empty.
+- **`public/gallery/`**, drop your photos here (01.jpg, 02.jpg, …); they appear in the gallery automatically. Placeholders show while the folder is empty.
   Replace the `PHOTOS` array with real engagement/wedding photography.
-- **`components/SharePhotos.js`** — `TELEGRAM_BOT_URL` is a placeholder.
+- **`components/SharePhotos.js`**, `TELEGRAM_BOT_URL` is a placeholder.
   Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
   its actual `t.me/...` link.
-- **Social preview (Open Graph)** — not yet set up. Controls how the link
+- **Social preview (Open Graph)**, not yet set up. Controls how the link
   looks when shared on WhatsApp/Telegram/SMS.
-- **`public/images/`** — Hero and Church currently use free Unsplash stock
+- **`public/images/`**, Hero and Church currently use free Unsplash stock
   photos as stand-ins. Swap in real photography when ready (same filenames,
   or update the `src` in `Hero.js` / `ChurchLocation.js`).
 
@@ -147,6 +147,6 @@ via `next/font/google`.
 
 - Countdown target is set in `components/Hero.js` (`TARGET` constant).
 - The map in `components/ChurchLocation.js` uses a keyless Google Maps embed
-  based on the address string — works out of the box, no API key needed.
-- The admin dashboard's security is a single shared password — appropriate
+  based on the address string, works out of the box, no API key needed.
+- The admin dashboard's security is a single shared password, appropriate
   for a personal wedding site, not meant for anything higher-stakes.

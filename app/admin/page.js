@@ -101,7 +101,7 @@ export default function AdminPage() {
   return (
     <div style={s.page}>
       <div style={s.wrap}>
-        <h1 style={s.h1}>Tira &amp; Lydu — Admin</h1>
+        <h1 style={s.h1}>Tira &amp; Lydu Admin</h1>
 
         <div style={s.tabs}>
           <button
@@ -125,7 +125,7 @@ export default function AdminPage() {
             {pending.map((m) => (
               <div key={m.id} style={s.card}>
                 <p style={s.msgText}>&ldquo;{m.message}&rdquo;</p>
-                <p style={s.msgFrom}>— {m.name}</p>
+                <p style={s.msgFrom}>{m.name}</p>
                 <div style={s.actions}>
                   <button onClick={() => updateStatus(m.id, 'approved')} style={s.approve}>Approve</button>
                   <button onClick={() => updateStatus(m.id, 'rejected')} style={s.reject}>Reject</button>
@@ -139,7 +139,7 @@ export default function AdminPage() {
             {approved.map((m) => (
               <div key={m.id} style={s.card}>
                 <p style={s.msgText}>&ldquo;{m.message}&rdquo;</p>
-                <p style={s.msgFrom}>— {m.name}</p>
+                <p style={s.msgFrom}>{m.name}</p>
                 <div style={s.actions}>
                   <button onClick={() => updateStatus(m.id, 'pending')} style={s.reject}>Unapprove</button>
                   <button onClick={() => deleteMessage(m.id)} style={s.delete}>Delete</button>
@@ -153,7 +153,7 @@ export default function AdminPage() {
                 {rejected.map((m) => (
                   <div key={m.id} style={s.card}>
                     <p style={s.msgText}>&ldquo;{m.message}&rdquo;</p>
-                    <p style={s.msgFrom}>— {m.name}</p>
+                    <p style={s.msgFrom}>{m.name}</p>
                     <div style={s.actions}>
                       <button onClick={() => updateStatus(m.id, 'approved')} style={s.approve}>Approve</button>
                       <button onClick={() => deleteMessage(m.id)} style={s.delete}>Delete</button>

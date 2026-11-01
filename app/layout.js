@@ -32,7 +32,7 @@ const ethiopic = Noto_Serif_Ethiopic({
 
 export const metadata = {
   title: 'Tira & Lydu',
-  description: 'November 21, 2026 — Addis Ababa, Ethiopia',
+  description: 'November 21, 2026 · Addis Ababa, Ethiopia',
 };
 
 export default function RootLayout({ children }) {

@@ -92,7 +92,7 @@ nav.site-nav.hidden {
   .nav-links { display: flex; }
 }
 
-/* Hamburger toggle — shown only below the desktop nav breakpoint */
+/* Hamburger toggle, shown only below the desktop nav breakpoint */
 .nav-hamburger {
   display: flex;
   flex-direction: column;
@@ -642,7 +642,7 @@ nav.site-nav.hidden {
 .lightbox-nav { top: 50%; transform: translateY(-50%); font-size: 24px; }
 
 /* ===== SHARE YOUR PHOTOS ===== */
-/* Compact CTA strip, not a full section — sits between Gallery and Notes */
+/* Compact CTA strip, not a full section, sits between Gallery and Notes */
 .share-strip {
   background: var(--ivory);
   padding: clamp(30px, 5vh, 48px) clamp(20px, 5vw, 56px) clamp(56px, 8vh, 88px);

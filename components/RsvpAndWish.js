@@ -92,7 +92,7 @@ export default function RsvpAndWish() {
         ) : (
           <div className="note-box">
             <p className="note-confirm">
-              Thank you, {name} — your RSVP has been received
+              Thank you, {name}. Your RSVP has been received
               {wish.trim() ? ', and your wish will appear below once approved.' : '.'}
             </p>
           </div>

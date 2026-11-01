@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import GalleryClient from './GalleryClient';
 
-// Drop your photos into /public/gallery — every image there is shown
+// Drop your photos into /public/gallery, every image there is shown
 // automatically (sorted by filename, e.g. 01.jpg, 02.jpg, ...).
 const EXTENSIONS = /\.(jpe?g|png|webp|avif)$/i;
 
@@ -27,7 +27,7 @@ function loadPhotos() {
       return files.map((f) => ({ src: `/gallery/${encodeURIComponent(f)}`, caption: '' }));
     }
   } catch (e) {
-    // folder missing — fall through to placeholders
+    // folder missing, fall through to placeholders
   }
   return FALLBACK;
 }

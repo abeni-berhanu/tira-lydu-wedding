@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function ScrollToTop() {
   useEffect(() => {
-    // Browsers restore the previous scroll position on refresh by default —
+    // Browsers restore the previous scroll position on refresh by default:
     // override that so the page always reopens at the Hero.
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
