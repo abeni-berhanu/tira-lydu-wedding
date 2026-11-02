@@ -1,7 +1,8 @@
 'use client';
 
-// TODO: replace with the real bot username once created via BotFather.
-const TELEGRAM_BOT_URL = 'https://t.me/tiraandlydu_bot';
+// Set NEXT_PUBLIC_TELEGRAM_BOT_URL in Vercel once the bot exists (see README).
+const TELEGRAM_BOT_URL =
+  process.env.NEXT_PUBLIC_TELEGRAM_BOT_URL || 'https://t.me/tiraandlydu_bot';
 
 export default function SharePhotos() {
   return (

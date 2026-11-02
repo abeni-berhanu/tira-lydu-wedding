@@ -7,6 +7,33 @@ Flow: Hero → Our Wedding Day → Gallery → Church/Map →
 Share Your Photos (Telegram) → RSVP + Wish (combined form) →
 Messages From Guests → Footer.
 
+## Telegram photo bot
+
+Guests tap **Share your photos**, which opens a Telegram bot. They send photos
+and videos to it, and the bot copies each one into a private Telegram group that
+only you and Lydu are in. The site stores nothing, and videos work at full size.
+
+1. In Telegram, message **@BotFather**, send `/newbot`, and pick a name and a
+   username (for example `tira_lydu_wedding_bot`). Copy the **token** it gives you.
+2. Create a **private group** with you and Lydu, then add the bot to it
+   (group info, Add member). Send any message in the group.
+3. Copy `.env.local.example` to `.env.local` and fill in:
+   `NEXT_PUBLIC_TELEGRAM_BOT_URL` (`https://t.me/<bot username>`),
+   `TELEGRAM_BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET` (any long random text) and
+   `NEXT_PUBLIC_SITE_URL`.
+4. Find the group id: `node --env-file=.env.local scripts/telegram.mjs find-group`
+   Copy the negative number next to your group into `TELEGRAM_GROUP_CHAT_ID`.
+5. Add the same five values (`NEXT_PUBLIC_TELEGRAM_BOT_URL`, `TELEGRAM_BOT_TOKEN`,
+   `TELEGRAM_WEBHOOK_SECRET`, `TELEGRAM_GROUP_CHAT_ID`, `NEXT_PUBLIC_SITE_URL`) in
+   Vercel (Settings, Environment Variables), then redeploy.
+6. Connect the bot to your site: `node --env-file=.env.local scripts/telegram.mjs setup`
+7. Test it: open the bot, tap Start, send a photo. It should appear in the group
+   with "From <guest name>" and the bot puts a heart on it.
+
+Notes: Telegram shrinks photos sent as "Photo", so ask guests to choose "File"
+to keep full quality (the bot's welcome message says this). Run step 4 before
+step 6, because once the webhook is set Telegram stops answering `find-group`.
+
 ## Run locally
 
 ```bash
@@ -134,7 +161,7 @@ via `next/font/google`.
 
 - **`public/gallery/`**, drop your photos here (01.jpg, 02.jpg, …); they appear in the gallery automatically. Placeholders show while the folder is empty.
   Replace the `PHOTOS` array with real engagement/wedding photography.
-- **`components/SharePhotos.js`**, `TELEGRAM_BOT_URL` is a placeholder.
+- **`components/SharePhotos.js`**, reads `NEXT_PUBLIC_TELEGRAM_BOT_URL`.
   Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
   its actual `t.me/...` link.
 - **Social preview (Open Graph)**, set up. `app/layout.js` holds the text
