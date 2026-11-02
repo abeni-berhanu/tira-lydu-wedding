@@ -30,9 +30,30 @@ const ethiopic = Noto_Serif_Ethiopic({
   display: 'swap',
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tiraandlydu.com';
+const title = 'Tira & Lydu · November 21, 2026';
+const description =
+  'Together with our families, we joyfully invite you to celebrate our marriage. Ethiopian Evangelical Lutheran Church, Addis Ababa.';
+
 export const metadata = {
-  title: 'Tira & Lydu',
-  description: 'November 21, 2026 · Addis Ababa, Ethiopia',
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: '/',
+    siteName: 'Tira & Lydu',
+    type: 'website',
+    // Link preview image: the hero photo (public/images/hero-bg.jpg).
+    images: [{ url: '/images/hero-bg.jpg', alt: 'Tira & Lydu' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/hero-bg.jpg'],
+  },
 };
 
 export default function RootLayout({ children }) {

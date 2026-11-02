@@ -137,8 +137,11 @@ via `next/font/google`.
 - **`components/SharePhotos.js`**, `TELEGRAM_BOT_URL` is a placeholder.
   Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
   its actual `t.me/...` link.
-- **Social preview (Open Graph)**, not yet set up. Controls how the link
-  looks when shared on WhatsApp/Telegram/SMS.
+- **Social preview (Open Graph)**, set up. `app/layout.js` holds the title and
+  description, and the preview image is `public/images/hero-bg.jpg`. The site
+  address is `https://tiraandlydu.com` (override with `NEXT_PUBLIC_SITE_URL`).
+  Keep the hero image under about 300 KB so WhatsApp shows it. Telegram caches
+  previews, so after changing it send the link to @WebpageBot to refresh.
 - **`public/images/`**, Hero and Church currently use free Unsplash stock
   photos as stand-ins. Swap in real photography when ready (same filenames,
   or update the `src` in `Hero.js` / `ChurchLocation.js`).
