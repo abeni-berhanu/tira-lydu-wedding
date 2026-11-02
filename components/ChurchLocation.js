@@ -46,7 +46,7 @@ export default function ChurchLocation() {
           <iframe
             title="Church location map"
             src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-            loading="lazy"
+            loading="eager"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </div>

@@ -496,7 +496,8 @@ nav.site-nav.hidden {
   border: 0;
   display: block;
   border-radius: 10px;
-  filter: grayscale(0.3) contrast(1.05);
+  filter: invert(92%) hue-rotate(180deg) saturate(0.55) brightness(0.92) contrast(0.95);
+  background: #1c1d18;
 }
 .church-cta {
   display: inline-flex;

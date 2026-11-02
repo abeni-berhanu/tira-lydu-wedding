@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // id: null means "scroll to top" (Home); others match section ids in the page.
 const LINKS = [
@@ -11,23 +11,7 @@ const LINKS = [
 ];
 
 export default function Nav() {
-  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const lastScroll = useRef(0);
-
-  useEffect(() => {
-    function onScroll() {
-      const cur = window.scrollY;
-      if (cur > lastScroll.current && cur > 40) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-      lastScroll.current = cur;
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Lock page scrolling while the mobile menu is open.
   useEffect(() => {
@@ -60,7 +44,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`site-nav ${hidden && !menuOpen ? 'hidden' : ''}`}>
+      <nav className="site-nav">
         <span className="nav-name">T &amp; L</span>
         <div className="nav-links">
           {LINKS.map((l) => (
