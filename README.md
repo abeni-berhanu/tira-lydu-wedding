@@ -137,11 +137,12 @@ via `next/font/google`.
 - **`components/SharePhotos.js`**, `TELEGRAM_BOT_URL` is a placeholder.
   Create the real bot via [@BotFather](https://t.me/BotFather) and swap in
   its actual `t.me/...` link.
-- **Social preview (Open Graph)**, set up. `app/layout.js` holds the title and
-  description, and the preview image is `public/images/hero-bg.jpg`. The site
+- **Social preview (Open Graph)**, set up. `app/layout.js` holds the text
+  (bold "Wedding Invitation", title "Tira and Lydu Wedding", and the short
+  invitation line). The preview picture is `app/opengraph-image.jpg` (copy in
+  `app/twitter-image.jpg`), 1200x630. Replace both files to change it. The site
   address is `https://tiraandlydu.com` (override with `NEXT_PUBLIC_SITE_URL`).
-  Keep the hero image under about 300 KB so WhatsApp shows it. Telegram caches
-  previews, so after changing it send the link to @WebpageBot to refresh.
+  Telegram caches previews, so after changing it send the link to @WebpageBot.
 - **`public/images/`**, Hero and Church currently use free Unsplash stock
   photos as stand-ins. Swap in real photography when ready (same filenames,
   or update the `src` in `Hero.js` / `ChurchLocation.js`).

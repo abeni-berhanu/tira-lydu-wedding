@@ -31,9 +31,8 @@ const ethiopic = Noto_Serif_Ethiopic({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tiraandlydu.com';
-const title = 'Tira & Lydu · November 21, 2026';
-const description =
-  'Together with our families, we joyfully invite you to celebrate our marriage. Ethiopian Evangelical Lutheran Church, Addis Ababa.';
+const title = 'Tira and Lydu Wedding';
+const description = 'We joyfully invite you to celebrate our marriage.';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,16 +42,13 @@ export const metadata = {
     title,
     description,
     url: '/',
-    siteName: 'Tira & Lydu',
+    siteName: 'Wedding Invitation',
     type: 'website',
-    // Link preview image: the hero photo (public/images/hero-bg.jpg).
-    images: [{ url: '/images/hero-bg.jpg', alt: 'Tira & Lydu' }],
   },
   twitter: {
     card: 'summary_large_image',
     title,
     description,
-    images: ['/images/hero-bg.jpg'],
   },
 };
 
