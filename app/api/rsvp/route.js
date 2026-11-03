@@ -10,7 +10,11 @@ export async function POST(request) {
   }
 
   try {
-    const { name, attending, wish } = await request.json();
+    const body = await request.json();
+    const attending = body.attending;
+    // Keep stored text a sensible length so one long entry can't break the page.
+    const name = typeof body.name === 'string' ? body.name.slice(0, 80) : '';
+    const wish = typeof body.wish === 'string' ? body.wish.slice(0, 400) : '';
 
     if (!name || !name.trim() || !['yes', 'no'].includes(attending)) {
       return NextResponse.json({ error: 'Name and attendance are required.' }, { status: 400 });

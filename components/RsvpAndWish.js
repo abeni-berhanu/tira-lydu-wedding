@@ -76,6 +76,7 @@ export default function RsvpAndWish() {
                   id="rsvp-wish"
                   rows={3}
                   value={wish}
+                  maxLength={400}
                   onChange={(e) => setWish(e.target.value)}
                 />
               </div>

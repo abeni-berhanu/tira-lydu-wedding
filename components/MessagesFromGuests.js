@@ -1,21 +1,48 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
-function MessageCard({ text, from }) {
+// Marquee settings: the speed is constant (pixels per second), so it no
+// longer depends on how many messages there are.
+const CARD_W = 260;
+const GAP = 20;
+
+function MessageCard({ text, from, onOpen }) {
+  const textRef = useRef(null);
+  const [cut, setCut] = useState(false);
+
+  // True when the text is longer than the card, so a "Read more" link is needed.
+  useEffect(() => {
+    const el = textRef.current;
+    if (el && onOpen) setCut(el.scrollHeight > el.clientHeight + 1);
+  }, [text, onOpen]);
+
+  const open = cut ? () => onOpen({ text, from }) : undefined;
+
   return (
-    <div className="message-card">
-      “{text}”
-      <div className="message-from">{from}</div>
+    <div
+      className={`message-card ${cut ? 'is-cut' : ''}`}
+      onClick={open}
+      onKeyDown={open ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } } : undefined}
+      role={open ? 'button' : undefined}
+      tabIndex={open ? 0 : undefined}
+    >
+      <div className="message-text" ref={textRef}>“{text}”</div>
+      <div className="message-foot">
+        <span className="message-from">{from}</span>
+        {cut && <span className="message-more">Read more</span>}
+      </div>
     </div>
   );
 }
 
 export default function MessagesFromGuests() {
   const [showAll, setShowAll] = useState(false);
+  const [active, setActive] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [marquee, setMarquee] = useState({ copies: 1, duration: 40 });
 
   useEffect(() => {
     let cancelled = false;
@@ -43,6 +70,22 @@ export default function MessagesFromGuests() {
     return () => { cancelled = true; };
   }, []);
 
+  useEffect(() => {
+    if (!messages.length) return;
+    function calc() {
+      const speed = window.innerWidth < 640 ? 18 : 26; // px per second
+      const setWidth = messages.length * (CARD_W + GAP);
+      // Repeat the set until it is wider than the screen, so there is never a gap.
+      const copies = Math.max(1, Math.ceil((window.innerWidth * 1.5) / setWidth));
+      setMarquee({ copies, duration: (copies * setWidth) / speed });
+    }
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, [messages.length]);
+
+  const track = Array.from({ length: marquee.copies * 2 }).flatMap(() => messages);
+
   return (
     <section className="messages-section" id="notes">
       <div className="messages-inner">
@@ -60,10 +103,10 @@ export default function MessagesFromGuests() {
       ) : (
         <>
           <div className="messages-marquee-wrap">
-            <div className="messages-marquee">
-              {/* Rendered twice back-to-back so the CSS loop (-50%) is seamless */}
-              {[...messages, ...messages].map((m, i) => (
-                <MessageCard key={i} text={m.text} from={m.from} />
+            <div className="messages-marquee" style={{ animationDuration: `${marquee.duration}s` }}>
+              {/* The set is repeated an even number of times so the -50% loop is seamless */}
+              {track.map((m, i) => (
+                <MessageCard key={i} text={m.text} from={m.from} onOpen={setActive} />
               ))}
             </div>
           </div>
@@ -75,6 +118,18 @@ export default function MessagesFromGuests() {
             </button>
           </div>
         </>
+      )}
+
+      {active && (
+        <div className="messages-modal-overlay" onClick={() => setActive(null)}>
+          <div className="messages-modal message-single" onClick={(e) => e.stopPropagation()}>
+            <button className="messages-modal-close" onClick={() => setActive(null)}>
+              CLOSE ✕
+            </button>
+            <div className="message-single-text">“{active.text}”</div>
+            <div className="message-single-from">{active.from}</div>
+          </div>
+        </div>
       )}
 
       {showAll && (

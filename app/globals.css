@@ -803,7 +803,9 @@ nav.site-nav.hidden {
 }
 .messages-marquee {
   display: flex;
+  align-items: flex-start;
   gap: 20px;
+  padding-right: 20px; /* keeps the -50% loop exactly seamless */
   width: max-content;
   animation: messages-scroll 42s linear infinite;
 }
@@ -816,6 +818,12 @@ nav.site-nav.hidden {
 
 .message-card {
   flex: 0 0 260px;
+  box-sizing: border-box;
+  height: 304px; /* fixed height: long messages are shortened with "..." */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-wrap: anywhere;
   background: #fffdf8;
   border: 1px solid rgba(21,19,15,0.08);
   box-shadow: 0 10px 30px rgba(21,19,15,0.06);
@@ -826,8 +834,36 @@ nav.site-nav.hidden {
   line-height: 1.6;
   color: #2c2a25;
 }
+.message-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.message-foot {
+  margin-top: auto;
+  padding-top: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.message-more {
+  flex-shrink: 0;
+  font-family: var(--font-body), sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--gold-deep);
+}
+.message-card.is-cut { cursor: pointer; }
+.message-card.is-cut:hover .message-more { text-decoration: underline; }
 .message-from {
-  margin-top: 16px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--font-body), sans-serif;
   font-style: normal;
   font-size: 13px;
@@ -901,9 +937,39 @@ nav.site-nav.hidden {
 @media (min-width: 900px) { .messages-modal-grid { columns: 3; } }
 .messages-modal-grid .message-card {
   flex: none;
+  display: block;
+  height: auto; /* full message, no shortening, inside the pop-up */
   width: 100%;
   margin-bottom: 20px;
   break-inside: avoid;
+}
+.messages-modal-grid .message-text {
+  display: block;
+  overflow: visible;
+}
+.messages-modal-grid .message-foot { margin-top: 16px; padding-top: 0; }
+.messages-modal-grid .message-from { white-space: normal; }
+
+/* Single message pop-up (opened with "Read more") */
+.messages-modal.message-single {
+  max-width: 560px;
+  padding-top: clamp(52px, 8vw, 64px);
+  text-align: center;
+}
+.message-single-text {
+  font-family: var(--font-fraunces), serif;
+  font-style: italic;
+  font-size: clamp(17px, 2.4vw, 20px);
+  line-height: 1.7;
+  color: #2c2a25;
+  overflow-wrap: anywhere;
+}
+.message-single-from {
+  margin-top: 22px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #8a8377;
 }
 
 /* ===== FOOTER ===== */
