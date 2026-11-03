@@ -61,7 +61,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: '54% 55%' }}
+          style={{ objectFit: 'cover', objectPosition: '40% 60%' }}
         />
       </div>
       <div className="hero-scrim"></div>

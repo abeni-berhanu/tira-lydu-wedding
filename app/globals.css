@@ -269,7 +269,7 @@ nav.site-nav.hidden {
 }
 
 /* Slow, subtle zoom on the background photo */
-.hero-bg { transform-origin: 50% 60%; animation: heroZoom 34s ease-in-out infinite alternate; }
+.hero-bg { transform-origin: 40% 65%; animation: heroZoom 34s ease-in-out infinite alternate; }
 @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
 
 /* Gold dust drifting upward, like light catching in the air */
