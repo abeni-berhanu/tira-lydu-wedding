@@ -6,6 +6,28 @@ import Image from 'next/image';
 // Wedding moment: November 21, 2026, 6:00 AM Ethiopian Time (EAT = UTC+3)
 const TARGET = new Date('2026-11-21T06:00:00+03:00').getTime();
 
+// Floating gold dust (fixed values so server and browser render the same).
+const DUST = [
+  { x: '25%', s: 6, d: 26, t: -13, dx: '36px' },
+  { x: '40%', s: 6, d: 28, t: -6, dx: '15px' },
+  { x: '69%', s: 4, d: 23, t: -16, dx: '-15px' },
+  { x: '4%', s: 3, d: 20, t: -18, dx: '9px' },
+  { x: '12%', s: 4, d: 27, t: -24, dx: '-16px' },
+  { x: '33%', s: 9, d: 15, t: -13, dx: '49px' },
+  { x: '56%', s: 7, d: 22, t: -1, dx: '-3px' },
+  { x: '73%', s: 6, d: 26, t: -3, dx: '38px' },
+  { x: '51%', s: 3, d: 17, t: -23, dx: '-34px' },
+  { x: '19%', s: 3, d: 22, t: -5, dx: '25px' },
+  { x: '47%', s: 6, d: 22, t: -4, dx: '-22px' },
+  { x: '89%', s: 3, d: 22, t: -7, dx: '-36px' },
+  { x: '29%', s: 4, d: 25, t: -21, dx: '51px' },
+  { x: '78%', s: 9, d: 16, t: -3, dx: '26px' },
+  { x: '64%', s: 7, d: 28, t: -12, dx: '-20px' },
+  { x: '47%', s: 4, d: 23, t: -13, dx: '-8px' },
+  { x: '50%', s: 6, d: 23, t: -12, dx: '-5px' },
+  { x: '66%', s: 6, d: 19, t: 0, dx: '-34px' },
+];
+
 function getRemaining() {
   const diff = TARGET - Date.now();
   if (diff <= 0) return null;
@@ -39,17 +61,28 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: '32% 45%' }}
+          style={{ objectFit: 'cover', objectPosition: '54% 55%' }}
         />
       </div>
       <div className="hero-scrim"></div>
 
-      <div className="hero-content">
-        <svg className="motif" viewBox="0 0 120 120">
-          <path d="M10 60 L60 10 L110 60 L60 110 Z" />
-          <path d="M60 10 L60 110 M10 60 L110 60" />
-        </svg>
+      <div className="hero-dust" aria-hidden="true">
+        {DUST.map((p, i) => (
+          <span
+            key={i}
+            style={{ '--x': p.x, '--s': `${p.s}px`, '--d': `${p.d}s`, '--t': `${p.t}s`, '--dx': p.dx }}
+          />
+        ))}
+      </div>
 
+      <div className="hero-frame" aria-hidden="true"></div>
+
+      <div className="hero-scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <i></i>
+      </div>
+
+      <div className="hero-content">
         <div className="hero-eyebrow">WE ARE GETTING MARRIED</div>
 
         <h1 className="hero-names">
@@ -57,7 +90,7 @@ export default function Hero() {
           <span className="word"><span>&amp; Lydu</span></span>
         </h1>
 
-        <div className="hero-rule"></div>
+        <div className="hero-ornament" aria-hidden="true"><i></i></div>
 
         <div className="hero-venue">
           NOVEMBER 21, 2026<br />

@@ -208,25 +208,6 @@ nav.site-nav.hidden {
   align-items: center;
 }
 
-.motif {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 90px;
-  opacity: 0.3;
-  pointer-events: none;
-}
-.motif path {
-  stroke: var(--gold);
-  stroke-width: 1;
-  fill: none;
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  animation: draw 2.2s 0.4s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes draw { to { stroke-dashoffset: 0; } }
 
 .hero-eyebrow {
   font-size: 14px;
@@ -257,13 +238,113 @@ nav.site-nav.hidden {
 .hero-names .word:nth-child(2) span { animation-delay: 0.30s; }
 @keyframes reveal { to { transform: translateY(0); } }
 
-.hero-rule {
-  width: 56px;
-  height: 1px;
-  background: var(--gold);
+.hero-ornament {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin: 0 auto 22px;
   opacity: 0;
   animation: fadeUp 0.9s 1.15s ease forwards;
+}
+.hero-ornament::before,
+.hero-ornament::after {
+  content: '';
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.hero-ornament::after { background: linear-gradient(to left, transparent, var(--gold)); }
+.hero-ornament i {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+.hero-ornament i::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--gold);
+}
+
+/* Slow, subtle zoom on the background photo */
+.hero-bg { transform-origin: 50% 60%; animation: heroZoom 34s ease-in-out infinite alternate; }
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+/* Gold dust drifting upward, like light catching in the air */
+.hero-dust { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.hero-dust span {
+  position: absolute;
+  bottom: -14px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 228, 170, 0.95) 0%, rgba(246, 228, 170, 0) 70%);
+  opacity: 0;
+  animation: heroDust var(--d) linear var(--t) infinite;
+}
+@keyframes heroDust {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12% { opacity: 0.5; }
+  70% { opacity: 0.32; }
+  100% { transform: translate3d(var(--dx), -105vh, 0); opacity: 0; }
+}
+@media (max-width: 640px) { .hero-dust span:nth-child(n+11) { display: none; } }
+
+/* Two thin gold lines (top and bottom) that fade out toward the sides */
+.hero-frame {
+  position: absolute;
+  inset: 76px 14px 14px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, transparent, rgba(185, 154, 99, 0.6) 50%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(to right, transparent, rgba(185, 154, 99, 0.6) 50%, transparent) bottom / 100% 1px no-repeat;
+  opacity: 0;
+  animation: heroFade 1.4s 1.2s ease forwards;
+}
+@media (min-width: 720px) { .hero-frame { inset: 84px 28px 28px; } }
+@keyframes heroFade { to { opacity: 1; } }
+
+/* Small "scroll" cue at the bottom */
+.hero-scroll {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: rgba(245, 241, 232, 0.7);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  animation: heroFade 1s 2.2s ease forwards;
+  pointer-events: none;
+}
+.hero-scroll span { padding-left: 0.32em; }
+.hero-scroll i {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  transform-origin: top;
+  animation: heroScrollLine 2.4s ease-in-out 2.6s infinite;
+}
+@keyframes heroScrollLine {
+  0% { transform: scaleY(0); opacity: 1; }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@media (max-height: 720px) { .hero-scroll { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .hero-dust span, .hero-scroll i { animation: none; }
+  .hero-dust { display: none; }
 }
 
 .hero-venue {
