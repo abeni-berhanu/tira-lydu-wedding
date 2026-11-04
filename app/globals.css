@@ -888,19 +888,35 @@ nav.site-nav.hidden {
 
 /* Continuously scrolling marquee of notes */
 .messages-marquee-wrap {
+  position: relative;
   overflow: hidden;
   width: 100%;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
+/* Soft fade at both edges (drawn as overlays instead of a CSS mask, which
+   phone browsers can render badly together with a running animation) */
+.messages-marquee-wrap::before,
+.messages-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7%;
+  z-index: 1;
+  pointer-events: none;
+}
+.messages-marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--ivory), rgba(245, 241, 232, 0)); }
+.messages-marquee-wrap::after { right: 0; background: linear-gradient(to left, var(--ivory), rgba(245, 241, 232, 0)); }
 .messages-marquee {
   display: flex;
   align-items: flex-start;
   gap: 20px;
   padding-right: 20px; /* keeps the -50% loop exactly seamless */
   width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
   animation: messages-scroll 42s linear infinite;
 }
+.messages-marquee.is-paused { animation-play-state: paused; }
 .messages-marquee-wrap:hover .messages-marquee { animation-play-state: paused; }
 
 @keyframes messages-scroll {
