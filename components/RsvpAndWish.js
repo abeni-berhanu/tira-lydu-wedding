@@ -2,6 +2,20 @@
 
 import { useState } from 'react';
 
+// Longest wish allowed, in words. Change this number to allow more or fewer.
+const MAX_WORDS = 100;
+
+function countWords(text) {
+  const t = text.trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
+// Keeps only the first MAX_WORDS words (also handles pasted text).
+function limitWords(text) {
+  if (countWords(text) <= MAX_WORDS) return text;
+  return text.trim().split(/\s+/).slice(0, MAX_WORDS).join(' ');
+}
+
 export default function RsvpAndWish() {
   const [name, setName] = useState('');
   const [attending, setAttending] = useState('yes');
@@ -76,9 +90,12 @@ export default function RsvpAndWish() {
                   id="rsvp-wish"
                   rows={3}
                   value={wish}
-                  maxLength={400}
-                  onChange={(e) => setWish(e.target.value)}
+                  maxLength={800}
+                  onChange={(e) => setWish(limitWords(e.target.value))}
                 />
+                {countWords(wish) >= MAX_WORDS && (
+                  <div className="note-counter">Limit reached: {MAX_WORDS} words</div>
+                )}
               </div>
 
               <button type="submit" className="note-submit" disabled={submitting}>

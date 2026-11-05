@@ -14,7 +14,11 @@ export async function POST(request) {
     const attending = body.attending;
     // Keep stored text a sensible length so one long entry can't break the page.
     const name = typeof body.name === 'string' ? body.name.slice(0, 80) : '';
-    const wish = typeof body.wish === 'string' ? body.wish.slice(0, 400) : '';
+    // Wishes are limited to 100 words (and 800 characters, in case of very long words).
+    const wish =
+      typeof body.wish === 'string'
+        ? body.wish.trim().split(/\s+/).slice(0, 100).join(' ').slice(0, 800)
+        : '';
 
     if (!name || !name.trim() || !['yes', 'no'].includes(attending)) {
       return NextResponse.json({ error: 'Name and attendance are required.' }, { status: 400 });

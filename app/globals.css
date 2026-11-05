@@ -838,6 +838,13 @@ nav.site-nav.hidden {
   color: var(--charcoal);
 }
 .note-field input:focus, .note-field textarea:focus, .note-field select:focus { border-color: var(--gold); }
+.note-counter {
+  margin-top: 4px;
+  text-align: right;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #8a8377;
+}
 .note-submit {
   margin-top: 4px;
   font-size: 13px;
@@ -1033,30 +1040,64 @@ nav.site-nav.hidden {
 .messages-modal-close:hover { color: var(--gold-deep); }
 .messages-modal-heading {
   font-family: var(--font-fraunces), serif;
-  font-size: clamp(20px, 3vw, 26px);
+  font-size: 17px;
   text-align: center;
   margin-bottom: 28px;
 }
-.messages-modal-grid {
-  columns: 1;
-  column-gap: 20px;
+/* "All messages" pop-up: a compact list with a header that stays in place.
+   Ivory surface, olive title, gold names. */
+.messages-modal.messages-modal-all {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-width: 600px;
+  overflow: hidden;
 }
-@media (min-width: 640px) { .messages-modal-grid { columns: 2; } }
-@media (min-width: 900px) { .messages-modal-grid { columns: 3; } }
-.messages-modal-grid .message-card {
-  flex: none;
+.messages-modal-head {
+  position: relative;
+  flex-shrink: 0;
+  padding: 16px 84px;
+  border-bottom: 1px solid rgba(185, 154, 99, 0.4);
+}
+.messages-modal-head .messages-modal-heading { margin: 0; color: var(--olive); }
+.messages-modal-all .messages-modal-close {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: var(--olive);
+}
+.messages-modal-all .messages-modal-close:hover { color: var(--gold-deep); }
+.messages-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px clamp(20px, 4vw, 32px) 20px;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.messages-list-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(63, 68, 54, 0.12);
+}
+.messages-list-item:last-child { border-bottom: 0; }
+.messages-list-text {
+  margin: 0;
+  font-family: var(--font-fraunces), serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2c2a25;
+  overflow-wrap: anywhere;
+}
+.messages-list-from {
   display: block;
-  height: auto; /* full message, no shortening, inside the pop-up */
-  width: 100%;
-  margin-bottom: 20px;
-  break-inside: avoid;
+  margin-top: 5px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--gold-deep);
 }
-.messages-modal-grid .message-text {
-  display: block;
-  overflow: visible;
-}
-.messages-modal-grid .message-foot { margin-top: 16px; padding-top: 0; }
-.messages-modal-grid .message-from { white-space: normal; }
 
 /* Single message pop-up (opened with "Read more") */
 .messages-modal.message-single {

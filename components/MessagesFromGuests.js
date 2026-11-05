@@ -7,6 +7,9 @@ import { supabase } from '../lib/supabaseClient';
 // longer depends on how many messages there are.
 const CARD_W = 260;
 const GAP = 20;
+// Scroll speed in pixels per second. Lower number = slower.
+const SPEED_PHONE = 14;
+const SPEED_DESKTOP = 23;
 
 function MessageCard({ text, from, onOpen }) {
   const textRef = useRef(null);
@@ -75,7 +78,7 @@ export default function MessagesFromGuests() {
   useEffect(() => {
     if (!messages.length) return;
     function calc() {
-      const speed = window.innerWidth < 640 ? 18 : 26; // px per second
+      const speed = window.innerWidth < 640 ? SPEED_PHONE : SPEED_DESKTOP;
       const setWidth = messages.length * (CARD_W + GAP);
       // Repeat the set until it is wider than the screen, so there is never a gap.
       const copies = Math.max(1, Math.ceil((window.innerWidth * 1.5) / setWidth));
@@ -155,16 +158,21 @@ export default function MessagesFromGuests() {
 
       {showAll && (
         <div className="messages-modal-overlay" onClick={() => setShowAll(false)}>
-          <div className="messages-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="messages-modal-close" onClick={() => setShowAll(false)}>
-              CLOSE ✕
-            </button>
-            <h3 className="messages-modal-heading">All Messages</h3>
-            <div className="messages-modal-grid">
-              {messages.map((m, i) => (
-                <MessageCard key={i} text={m.text} from={m.from} />
-              ))}
+          <div className="messages-modal messages-modal-all" onClick={(e) => e.stopPropagation()}>
+            <div className="messages-modal-head">
+              <h3 className="messages-modal-heading">All Messages</h3>
+              <button className="messages-modal-close" onClick={() => setShowAll(false)}>
+                CLOSE ✕
+              </button>
             </div>
+            <ul className="messages-list">
+              {messages.map((m, i) => (
+                <li className="messages-list-item" key={i}>
+                  <p className="messages-list-text">“{m.text}”</p>
+                  <span className="messages-list-from">{m.from}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
